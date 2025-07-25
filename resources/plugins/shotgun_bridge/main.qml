@@ -6,11 +6,10 @@
 // __email__ = "diegogh2000@gmail.com"
 
 
-import QtQuick 2.2
+import QtQuick 2.15
 import Painter 1.0
-import Qt.labs.platform 1.0
-import QtQuick.Dialogs 1.2
-import QtQuick.Window 2.2
+import QtQuick.Dialogs 6.0
+import QtQuick.Window 2.15
 import "."
 
 
@@ -534,12 +533,12 @@ PainterPlugin
   {
     id: saveSessionDialog
     title: "Save Project"
-    selectExisting : false
+    selectExisting: false
     nameFilters: [ "Substance Painter files (*.spp)" ]
 
     onAccepted:
     {
-      var url = fileUrl.toString();
+      var url = selectedFile.toString();
       alg.project.save(url, alg.project.SaveMode.Full);
       return true;
     }

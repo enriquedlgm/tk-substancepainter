@@ -7,9 +7,8 @@
 
 
 import AlgWidgets.Style 1.0
-import QtQuick 2.7
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
+import QtQuick 2.15
+import QtQuick.Controls 2.15
 
 Button {
   id: control
@@ -23,14 +22,12 @@ Button {
 
   enabled: control.isEngineLoaded
 
-  style: ButtonStyle {
-    background: Rectangle {
-        implicitWidth: control.width
-        implicitHeight: control.height
-        color: control.isHovered ?
-          "#262626" :
-          "transparent"
-    }
+  background: Rectangle {
+      implicitWidth: control.width
+      implicitHeight: control.height
+      color: control.isHovered ?
+        "#262626" :
+        "transparent"
   }
 
   Image {
