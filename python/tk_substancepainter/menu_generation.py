@@ -23,7 +23,8 @@ __author__ = "Diego Garcia Huerta"
 __email__ = "diegogh2000@gmail.com"
 
 
-from tank.platform.qt5 import QtWidgets, QtGui, QtCore, QtWebSockets, QtNetwork
+from tank.platform.qt6 import QtWidgets, QtGui, QtCore, QtWebSockets, QtNetwork
+from tank.platform.qt6.QtGui import QDesktopServices
 
 
 class MenuGenerator(object):
@@ -54,7 +55,7 @@ class MenuGenerator(object):
 
         self.menu_handle.activateWindow()
         self.menu_handle.raise_()
-        self.menu_handle.exec_(pos)
+        self.menu_handle.exec(pos)
 
     def create_menu(self, disabled=False):
         """
@@ -185,7 +186,7 @@ class MenuGenerator(object):
         Jump to shotgun, launch web browser
         """
         url = self._engine.context.shotgun_url
-        QtGui.QDesktopServices.openUrl(QtCore.QUrl(url))
+        QDesktopServices.openUrl(QtCore.QUrl(url))
 
     def _jump_to_fs(self):
         """

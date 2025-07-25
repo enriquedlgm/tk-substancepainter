@@ -205,7 +205,7 @@ class SubstancePainterEngine(Engine):
         specified.
         """
         if self._qt_app_central_widget:
-            from sgtk.platform.qt5 import QtWidgets, QtGui, QtCore
+            from sgtk.platform.qt6 import QtWidgets, QtGui, QtCore
 
             level_icon = {
                 "info": QtWidgets.QMessageBox.Information,
@@ -219,7 +219,7 @@ class SubstancePainterEngine(Engine):
             dlg.setWindowTitle("Shotgun Substance Painter Engine")
             dlg.setWindowFlags(dlg.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)
             dlg.show()
-            dlg.exec_()
+            dlg.exec()
 
     def show_error(self, msg):
         """
@@ -279,10 +279,11 @@ class SubstancePainterEngine(Engine):
 
         if self.has_ui:
             # only import QT if we have a UI
-            from sgtk.platform.qt import QtGui, QtCore
+            from sgtk.platform.qt6 import QtGui, QtCore
+            from sgtk.platform.qt6.QtGui import QDesktopServices
 
             url = QtCore.QUrl.fromLocalFile(LogManager().log_folder)
-            status = QtGui.QDesktopServices.openUrl(url)
+            status = QDesktopServices.openUrl(url)
             if not status:
                 self.log_error("Failed to open folder!")
 
@@ -520,7 +521,7 @@ class SubstancePainterEngine(Engine):
         """
         Initializes if not done already the QT Application for the engine.
         """
-        from sgtk.platform.qt5 import QtWidgets, QtGui
+        from sgtk.platform.qt6 import QtWidgets, QtGui
 
         if not QtWidgets.QApplication.instance():
             self._qt_app = QtWidgets.QApplication(sys.argv)
@@ -561,7 +562,7 @@ class SubstancePainterEngine(Engine):
         self.sgtk.execute_core_hook(TANK_ENGINE_INIT_HOOK_NAME, engine=self)
 
         # initalize qt loop
-        self._qt_app.exec_()
+        self._qt_app.exec()
 
     def post_context_change(self, old_context, new_context):
         """
