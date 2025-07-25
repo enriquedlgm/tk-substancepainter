@@ -15,7 +15,7 @@ import signal
 
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
-from tank.platform.qt6 import QtGui, QtCore, QtWebSockets, QtNetwork
+from tank.platform.qt5 import QtGui, QtCore, QtWebSockets, QtNetwork
 
 QCoreApplication = QtCore.QCoreApplication
 QUrl = QtCore.QUrl
@@ -82,7 +82,7 @@ class Client(QtCore.QObject):
             timeout_timer.timeout.connect(loop.quit)
             timeout_timer.start(5 * 1000.0)
 
-            loop.exec()
+            loop.exec_()
 
             return self.send_and_receive.data
 
@@ -337,11 +337,11 @@ class EngineClient(Client):
 
 if __name__ == "__main__":
     global client
-    app = QtWidgets.QApplication(sys.argv)
+    app = QApplication(sys.argv)
     client = Client(app)
     version = get_application_version(client)
     client.log_debug("application_version: %s" % version)
     version2 = get_application_version(client)
     client.log_debug("application_version2: %s" % version2)
 
-    app.exec()
+    app.exec_()

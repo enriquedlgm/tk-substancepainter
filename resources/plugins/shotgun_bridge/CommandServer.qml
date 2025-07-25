@@ -7,8 +7,8 @@
 
 
 import Painter 1.0
-import QtQuick 2.15
-import QtWebSockets 6.0
+import QtQuick 2.7
+import QtWebSockets 1.0
 
 Item {
   id: root

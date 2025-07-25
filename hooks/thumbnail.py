@@ -14,7 +14,7 @@ import uuid
 
 import tank
 from tank import Hook
-from tank.platform.qt6 import QtCore, QtGui, QtWidgets
+from tank.platform.qt import QtCore, QtGui
 
 
 class ThumbnailHook(Hook):
@@ -48,15 +48,7 @@ class ThumbnailHook(Hook):
 
         :returns:   The path to the thumbnail on disk
         """
-        app = QtWidgets.QApplication.instance()
-        if app is None:
-            return None
-            
-        screen = app.primaryScreen()
-        if screen is None:
-            return None
-            
-        thumb = screen.grabWindow(0)  # 0 is the desktop window
+        thumb = QtGui.QPixmap.grabWindow(QtGui.QApplication.desktop().winId())
 
         if thumb:
             # save the thumbnail
@@ -64,6 +56,5 @@ class ThumbnailHook(Hook):
             temp_filename = "sgtk_thumb_%s.jpg" % uuid.uuid4().hex
             jpg_thumb_path = os.path.join(temp_dir, temp_filename)
             thumb.save(jpg_thumb_path)
-            return jpg_thumb_path
 
-        return None
+        return jpg_thumb_path
